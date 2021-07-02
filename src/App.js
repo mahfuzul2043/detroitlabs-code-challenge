@@ -3,17 +3,31 @@ import Navbar from "./components/Navbar";
 import RouteHandler from "./components/RouteHandler";
 
 function App() {
+  /**
+   * 
+   * @param {boolean} success A boolean indicating whether location retrieval was successful
+   * @param {string} message Error message if location retrieval was unsuccessful
+   * @param {object} location The location object containing details of the user's location
+   * @returns 
+   */
   const getLocationObj = (success, message, location) => ({ success, message, location })
 
+  /**
+   * Gets the users location
+   */
   const getLocation = () => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => setLocationObj(getLocationObj(true, null, position)), showError);
+      navigator.geolocation.getCurrentPosition(position => setLocationObj(getLocationObj(true, null, position)), setError);
     } else { 
       setLocationObj(getLocationObj(false, "Geolocation is not supported by this browser.", null));
     }
   }
   
-  const showError = error => {
+  /**
+   * Sets the error message if there was an error with the user's location
+   * @param {object} error The error object
+   */
+  const setError = error => {
     switch(error.code) {
       case error.PERMISSION_DENIED:
         setLocationObj(getLocationObj(false, "User denied the request for Geolocation.", null));

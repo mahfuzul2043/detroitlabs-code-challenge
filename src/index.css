@@ -34,3 +34,9 @@ summary {
   padding: 10px;
   background-color: grey;
 }
+
+.weather-dropdown {
+  background-color: brown;
+  color: white;
+  padding: 20px;
+}

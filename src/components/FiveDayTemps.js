@@ -7,6 +7,9 @@ function FiveDayTemps({ locationObj }) {
     const [fiveDayTemps, setFiveDayTemps] = useState(getHttpObj(null, null));
 
     useEffect(() => {
+        /**
+         * Http call to the openweathermap API to retrieve five day temp data
+         */
         const getFiveDayTemps = async () => {
             try {
                 const response = await httpClient.getFiveDayTemperatures();
@@ -40,10 +43,15 @@ function FiveDayTemps({ locationObj }) {
         // eslint-disable-next-line
     }, []);
 
+    /**
+     * Render hourly weather data
+     * @param {object} obj The hourly weather object
+     * @returns React component rendering hourly weather data
+     */
     const mapHours = obj => {
         const weatherDetails = obj.weather[0];
         return (
-            <div key={obj.dt} style={{ backgroundColor: 'brown', color: 'white', padding: 20 }}>
+            <div key={obj.dt} className='weather-dropdown'>
                 <img src={`http://openweathermap.org/img/wn/${weatherDetails.icon}.png`} alt={weatherDetails.main} /> | {obj.dt_txt} | {obj.main.temp} degrees fahrenheit | {weatherDetails.description}
                 <br />
                 <br />
@@ -51,6 +59,11 @@ function FiveDayTemps({ locationObj }) {
         )
     }
 
+    /**
+     * Render weather accordions
+     * @param {string} key The object key
+     * @returns React component rendering weather accordions
+     */
     const mapDays = key => {
         return (
             <details key={key}>

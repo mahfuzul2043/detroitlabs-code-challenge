@@ -1,5 +1,10 @@
 import { Link } from 'react-router-dom';
 
+/**
+ * This component is responsible for displaying the app's navbar
+ * @param {object} props Component props
+ * @returns Navbar component
+ */
 function Navbar(props) {
     return (
         <header>
