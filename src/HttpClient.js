@@ -16,7 +16,7 @@ class HttpClient {
     }
 
     #getEndpoint(param) {
-        return `https://api.openweathermap.org/data/2.5/${param}?lat=${this.LATITUDE}&lon=${this.LONGITUDE}&appid=${this.API_KEY}`
+        return `https://api.openweathermap.org/data/2.5/${param}?lat=${this.LATITUDE}&lon=${this.LONGITUDE}&appid=${this.API_KEY}&units=imperial`
     }
 }
 

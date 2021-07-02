@@ -3,11 +3,7 @@ import Navbar from "./components/Navbar";
 import RouteHandler from "./components/RouteHandler";
 
 function App() {
-  const getLocationObj = (success, message, location) => {
-    return {
-      success, message, location
-    }
-  }
+  const getLocationObj = (success, message, location) => ({ success, message, location })
 
   const getLocation = () => {
     if (navigator.geolocation) {
