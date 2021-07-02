@@ -25,3 +25,12 @@ main {
   display: flex;
   justify-content: center;
 }
+
+details {
+  margin: 10px 0;
+}
+
+summary {
+  padding: 10px;
+  background-color: grey;
+}
