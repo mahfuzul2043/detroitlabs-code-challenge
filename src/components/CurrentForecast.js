@@ -1,32 +1,34 @@
 import { useEffect, useState } from "react";
-import { getHttpObj } from "../Helpers";
+import { createHttpObj } from "../Helpers";
 import HttpClient from "../HttpClient";
 
 function CurrentForecast({ locationObj }) {
-    const httpClient = new HttpClient(locationObj.location.coords.latitude, locationObj.location.coords.longitude);
-    const [currentForecast, setCurrentForecast] = useState(getHttpObj(null, null));
+    const [currentForecast, setCurrentForecast] = useState(createHttpObj(null, null));
 
     useEffect(() => {
+        /**
+         * Http call to get current forecast
+         */
         const getCurrentForecast = async () => {
+            const httpClient = new HttpClient(locationObj.location.coords.latitude, locationObj.location.coords.longitude);
+
             try {
                 const response = await httpClient.getCurrentForecast();
-                setCurrentForecast(getHttpObj(true, response.data));
+                setCurrentForecast(createHttpObj(true, response.data));
             } catch (e) {
                 alert(e);
-                setCurrentForecast(getHttpObj(false, null));
+                setCurrentForecast(createHttpObj(false, null));
             }
         }
 
         getCurrentForecast();
-
-        // eslint-disable-next-line
-    }, []);
+    }, [locationObj]);
 
     return (
         <main>
-            {currentForecast.success === null && 'Loading...'}
+            {currentForecast.success === null && <span data-testid='loading-currentforecast-element'>Loading...</span>}
             {currentForecast.success === true && (
-                `The temperature is ${currentForecast.data.main.temp} degrees fahrenheit at ${currentForecast.data.name}`
+                <span data-testid='temperature-display-element'>{`The temperature is ${currentForecast.data.main.temp} degrees fahrenheit at ${currentForecast.data.name}`}</span>
             )}
         </main>
     )

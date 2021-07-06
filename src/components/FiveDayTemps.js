@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
-import { getHttpObj } from "../Helpers";
+import { createHttpObj } from "../Helpers";
 import HttpClient from "../HttpClient";
 
 function FiveDayTemps({ locationObj }) {
-    const httpClient = new HttpClient(locationObj.location.coords.latitude, locationObj.location.coords.longitude);
-    const [fiveDayTemps, setFiveDayTemps] = useState(getHttpObj(null, null));
+    const [fiveDayTemps, setFiveDayTemps] = useState(createHttpObj(null, null));
 
     useEffect(() => {
         /**
          * Http call to the openweathermap API to retrieve five day temp data
          */
         const getFiveDayTemps = async () => {
+            const httpClient = new HttpClient(locationObj.location.coords.latitude, locationObj.location.coords.longitude);
+
             try {
                 const response = await httpClient.getFiveDayTemperatures();
 
@@ -32,16 +33,15 @@ function FiveDayTemps({ locationObj }) {
 
                 responseCpy.list = tempsByDay;
                 
-                setFiveDayTemps(getHttpObj(true, responseCpy));
+                setFiveDayTemps(createHttpObj(true, responseCpy));
             } catch (e) {
                 alert(e);
-                setFiveDayTemps(getHttpObj(false, null));
+                setFiveDayTemps(createHttpObj(false, null));
             }
         }
 
         getFiveDayTemps();
-        // eslint-disable-next-line
-    }, []);
+    }, [locationObj]);
 
     /**
      * Render hourly weather data

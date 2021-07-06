@@ -4,6 +4,6 @@
  * @param {*} data Http data if call was successful
  * @returns Http success state and data
  */
-const getHttpObj = (success, data) => ({ success, data });
+const createHttpObj = (success, data) => ({ success, data });
 
-export { getHttpObj };
+export { createHttpObj };
