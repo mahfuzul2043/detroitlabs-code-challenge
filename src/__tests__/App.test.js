@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from "@testing-library/react"
 import { BrowserRouter } from "react-router-dom";
-import App from "./App"
+import App from "../App"
 
 it('Should render navbar and currentforecast initially', async () => {
     const mockGeolocation = {
