@@ -25,7 +25,7 @@ function CurrentForecast({ locationObj }) {
     }, [locationObj]);
 
     return (
-        <main>
+        <main data-testid='currentforecast-element'>
             {currentForecast.success === null && <span data-testid='loading-currentforecast-element'>Loading...</span>}
             {currentForecast.success === true && (
                 <span data-testid='temperature-display-element'>{`The temperature is ${currentForecast.data.main.temp} degrees fahrenheit at ${currentForecast.data.name}`}</span>

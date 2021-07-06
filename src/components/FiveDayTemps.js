@@ -51,7 +51,7 @@ function FiveDayTemps({ locationObj }) {
     const mapHours = obj => {
         const weatherDetails = obj.weather[0];
         return (
-            <div key={obj.dt} className='weather-dropdown'>
+            <div key={obj.dt} className='weather-dropdown' data-testid='weather-row-element'>
                 <img src={`http://openweathermap.org/img/wn/${weatherDetails.icon}.png`} alt={weatherDetails.main} /> | {obj.dt_txt} | {obj.main.temp} degrees fahrenheit | {weatherDetails.description}
                 <br />
                 <br />
@@ -66,7 +66,7 @@ function FiveDayTemps({ locationObj }) {
      */
     const mapDays = key => {
         return (
-            <details key={key}>
+            <details key={key} data-testid='accordion-element'>
                 <summary>
                     {key}
                 </summary>
@@ -77,7 +77,7 @@ function FiveDayTemps({ locationObj }) {
 
     return (
         <main>
-            {fiveDayTemps.success === null && 'Loading...'}
+            {fiveDayTemps.success === null && <span data-testid='loading-5daytemps-element'>Loading...</span>}
             {fiveDayTemps.success === true && (
                 <div className='five-day-temps-wrapper'>
                     {Object.keys(fiveDayTemps.data.list).map(mapDays)}

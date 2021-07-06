@@ -1,0 +1,1 @@
+export default { name: 'Chicago', main: { temp: 71.5 } };
